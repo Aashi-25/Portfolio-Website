@@ -1,0 +1,17 @@
+js to be implemented:
+smooth scrolling:-
+    attach loco scroll css
+    attach locomotive scroll min js
+    some code from loco github for js
+
+gsap
+    attach gsap link from cdn to html file
+scrolltrigger
+
+#jab mouse move ho toh hum log skew kr paaye aur maximum skew and minimum skew define kr paaye ya set kar paaye. jab mouse move ho toh chapta ki value badhe aur jab mouse chalna band ho jaaye toh chapta hata lo
+
+when scale value = 1, object appears normal and jis bhi axis meh chapta krna ho decrease value of that axis less than 1
+
+we have fixed the lower snd upper limit for the circle(cursor)-> (.8)---(1)---(1.2) 
+if the difference of new and previous cursor position is less than .8 it gets converted to .8 and if its more than 1.2 so gets converted to 1.2
+this effect is called "clamp" in gsap
