@@ -89,6 +89,7 @@ html,body{
     flex-direction:column;
     align-items:end;
     /* background-color:red; */
+    margin-left:25vw;
 }
 
 .blocktext h5{
@@ -194,6 +195,7 @@ html,body{
     opacity:0;
     z-index:999; /*to get the image on top of text z index is increased */
     position:absolute;
+    transform: translate(-50% , -50%);
 }
 /* styling of second pg is done */
 

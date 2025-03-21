@@ -12,7 +12,7 @@ function firstpageanim(){
         y: '-10' ,    //negative y means upward..moving the element 10px upwards
         opacity: 0,   //start from invisible
         duration:1.5,
-        ease:Expo.easeInOut,
+        ease: Expo.easeInOut,
     })
 
     .to(".boundingelem", { 
@@ -20,7 +20,7 @@ function firstpageanim(){
         duration:1.5,
         ease:Expo.easeInOut,
         delay: -1,
-        stagger: .2 //helps in producing delay in animation on idividual elements of this class 
+        stagger: 0.2 //helps in producing delay in animation on idividual elements of this class 
     })
 
     .from("#herofooter", {
@@ -68,13 +68,44 @@ firstpageanim();
 // teeno element ko select karo, uske baad eeno par ek mouse move lagao, jab mouse move ho toh yeh pta karo ki mouse kaha pr h, jiska mtlb h mouse ki x & y position pata karo, ab mouse ki x y position ke badle uss img ko show karo and us img ko move kro, move krte wakt rotate kro and jaise jaise mouse tez chale waise waise rotation bhi ez ho jaye
 
 document.querySelectorAll(".element").forEach(function(element){
+    var rotate = 0;
+    var diffrot = 0;
+
     element.addEventListener("mousemove",function(details){
-        console.log(details.clientX , details.clientY);
+        // console.log(details.clientY-element.getBoundingClientRect().top); //this method contains all the information about where the element is present on the screen 
+        //location of mouse on screen vertically - loc of elem on screen from top  
+        //basically tells mouse line se kitna neeche hai
+
+        var diff=(details.clientY-element.getBoundingClientRect().top);
+        diffrot = details.clientX - rotate;
+        rotate = details.clientX;
+
         gsap.to(element.querySelector("img"),{
             opacity: 1,
-            ease: Power1,
-            top: details.clientX,
-            left: details.clientY,
+            ease: Power3.easeOut,
+            // top: details.clientX,
+            // left: details.clientY,
+            top: diff ,  //img ko utna neeche le aaye jitna mouse neeche hora hai
+            left: details.clientX,
+            rotate:gsap.utils.clamp(-20 , 20 , diffrot*0.5),
+            // scale: 1.3
+            duration: 0.5
         });
     });
+
+    element.addEventListener("mouseleave" , function(details) {
+        var diff=(details.clientY-element.getBoundingClientRect().top);
+        diffrot = details.clientX - rotate;
+        rotate = details.clientX;
+    
+        gsap.to(element.querySelector("img"), {
+            top: diff ,  //img ko utna neeche le aaye jitna mouse neeche hora hai
+            left: details.clientX,
+            rotate:gsap.utils.clamp(-20 , 20 , diffrot*0.5),
+            opacity : 0,
+            ease : Power3.easeOut,
+            duration : 0.5
+        })
+    })
+
 });
